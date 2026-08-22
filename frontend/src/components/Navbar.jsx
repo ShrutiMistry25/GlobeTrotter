@@ -1,3 +1,4 @@
+import { useState, useRef, useEffect } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
@@ -11,6 +12,19 @@ const links = [
 export default function Navbar() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef(null);
+
+  /* Close dropdown when clicking outside */
+  useEffect(() => {
+    function handleClickOutside(e) {
+      if (menuRef.current && !menuRef.current.contains(e.target)) {
+        setMenuOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   return (
     <header className="sticky top-0 z-40 border-b border-outline/60 bg-background/85 backdrop-blur-md">
@@ -57,8 +71,11 @@ export default function Navbar() {
             Plan New Trip
           </Link>
           {user && (
-            <div className="group relative">
-              <button className="ml-1 flex items-center">
+            <div className="relative" ref={menuRef}>
+              <button
+                className="ml-1 flex items-center"
+                onClick={() => setMenuOpen((prev) => !prev)}
+              >
                 {user.avatar_url ? (
                   <img src={user.avatar_url} alt={user.name} className="h-10 w-10 rounded-full border border-outline object-cover" />
                 ) : (
@@ -67,13 +84,24 @@ export default function Navbar() {
                   </span>
                 )}
               </button>
-              <div className="invisible absolute right-0 top-12 w-52 rounded-2xl bg-surface p-2 opacity-0 shadow-ambient transition group-hover:visible group-hover:opacity-100">
+              <div
+                className={`absolute right-0 top-full mt-2 w-52 rounded-2xl bg-surface p-2 shadow-ambient transition-all duration-150 ${
+                  menuOpen
+                    ? 'visible translate-y-0 opacity-100'
+                    : 'invisible -translate-y-1 opacity-0'
+                }`}
+              >
                 <p className="truncate px-3 py-2 text-xs font-semibold text-muted">{user.email}</p>
-                <Link to="/profile" className="flex items-center gap-2 rounded-xl px-3 py-2.5 text-sm font-semibold text-ink hover:bg-surface-container">
+                <Link
+                  to="/profile"
+                  onClick={() => setMenuOpen(false)}
+                  className="flex items-center gap-2 rounded-xl px-3 py-2.5 text-sm font-semibold text-ink hover:bg-surface-container"
+                >
                   <span className="material-symbols-outlined text-lg">settings</span> Profile Settings
                 </Link>
                 <button
                   onClick={() => {
+                    setMenuOpen(false);
                     logout();
                     navigate('/login');
                   }}
