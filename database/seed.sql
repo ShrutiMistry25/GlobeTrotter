@@ -1,6 +1,6 @@
 -- ============================================================
 -- GlobeTrotter - Seed Data (MySQL 8)
--- Demo login: elena@globetrotter.app / Demo@1234
+-- Demo login: test@test.com / test1234
 -- Run AFTER schema.sql: mysql -u root -p < database/seed.sql
 -- ============================================================
 
@@ -19,12 +19,12 @@ TRUNCATE TABLE users;
 SET FOREIGN_KEY_CHECKS = 1;
 
 -- ------------------------------------------------------------
--- USERS (password for both: Demo@1234)
+-- USERS (password for both: test1234)
 -- ------------------------------------------------------------
 INSERT INTO users (id, name, email, password_hash, avatar_url, language_pref) VALUES
-(1, 'Elena Rossi', 'elena@globetrotter.app', '$2a$10$128PItOV0g..AusD..8LrOX9KyekKWyoIETe6WtzsVsZXYXsuz72.',
+(1, 'Elena Rossi', 'test@test.com', '$2a$10$qKTm3CcQZxkdhvR3XHGS8O2.GsU1su5GcduaDyqix.kznYH.jkD6m',
  'https://lh3.googleusercontent.com/aida-public/AB6AXuBfqkcR-sZMrjPWQuBzXitDg6NUWEB7qiIgGU4r1sI4tL39yA9wYpgHQf-0NKvhvwbLngdYAuvf7kKll2pzpGpgZFnuiq3w8kOcO6nfNfkDjSftSq4cQvexDrNMH3N6jBVC4OvE5ZmwHJSHIaVGKzO7PVQRtBR2GODktwS7btHzXgE5sfeXaiMkYC2ju4zYBJdqc7c9e-EBqCKrTRo1hZ_Egra_Z6TpaWoyfRyK6MNW9XfI3mNLUUT3', 'it'),
-(2, 'Sarah Jenkins', 'sarah@globetrotter.app', '$2a$10$128PItOV0g..AusD..8LrOX9KyekKWyoIETe6WtzsVsZXYXsuz72.',
+(2, 'Sarah Jenkins', 'sarah@test.com', '$2a$10$qKTm3CcQZxkdhvR3XHGS8O2.GsU1su5GcduaDyqix.kznYH.jkD6m',
  'https://lh3.googleusercontent.com/aida-public/AB6AXuC7EwD-pYnlpHkRY0R8Ww1V7x-ceNlB_k03BEppRSpeQk5JAJ9u-s736LBMDDd51WGkhqa71Xty3Y5jV0OX_UEoIIIk1wrvdvKksqTIcqpWCsI0ohJ-Xnrz_6kys8lb4gxlSK48ZZXwujrta4YBuEITxqdpLfPvWuSu0kQppXvHVJfgmBQHjbjP2vUzSEX_Uq4BB_MVVa7rquo9W0fyUiVrtqQmjMsuBR3u-tq7qBLjS4jQi4eRrfuz', 'en');
 
 -- ------------------------------------------------------------

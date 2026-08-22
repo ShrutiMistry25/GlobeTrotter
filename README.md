@@ -93,7 +93,7 @@ mysql -u root -p < database/schema.sql
 mysql -u root -p < database/seed.sql
 ```
 
-Seed data includes a demo account: **elena@globetrotter.app / Demo@1234**
+Seed data includes a demo account: **test@test.com / test1234**
 (12 cities · 38 activities · sample trips with itineraries & expenses).
 
 ### Environment Variables
