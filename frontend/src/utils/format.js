@@ -1,12 +1,12 @@
 export const money = (n) =>
   n === null || n === undefined
     ? '—'
-    : `$${Number(n).toLocaleString('en-US', { maximumFractionDigits: 0 })}`;
+    : `₹${Number(n).toLocaleString('en-IN', { maximumFractionDigits: 0 })}`;
 
 export const money2 = (n) =>
   n === null || n === undefined
     ? '—'
-    : `$${Number(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    : `₹${Number(n).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
 export const fmtDate = (d) =>
   new Date(`${d}T00:00:00`).toLocaleDateString('en-US', {
@@ -64,4 +64,4 @@ export const categoryIcon = (cat) =>
     other: 'receipt_long'
   }[cat] || 'explore');
 
-export const costIndex = (i) => '$'.repeat(i) + '·'.repeat(3 - i);
+export const costIndex = (i) => '₹'.repeat(i) + '·'.repeat(3 - i);

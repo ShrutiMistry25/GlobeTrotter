@@ -276,7 +276,7 @@ export default function ItineraryBuilderPage() {
                 <img src={c.image_url} alt="" className="h-12 w-12 rounded-xl object-cover" />
                 <div className="flex-1">
                   <p className="text-sm font-bold text-ink">{c.name}, {c.country}</p>
-                  <p className="text-xs text-muted">{'$'.repeat(c.cost_index)} · {c.activity_count} activities</p>
+                  <p className="text-xs text-muted">{'₹'.repeat(c.cost_index)} · {c.activity_count} activities</p>
                 </div>
                 {stopForm.city_id === c.id && <span className="material-symbols-outlined text-primary">check_circle</span>}
               </button>
@@ -329,7 +329,7 @@ export default function ItineraryBuilderPage() {
           </div>
         ) : (
           <div className="space-y-4">
-            <Field label="Title"><input className={inputCls} value={actForm.title} placeholder="e.g. Sunset picnic by the river"
+            <Field label="Title"><input className={inputCls} value={actForm.title} placeholder="e.g. Sunrise boat ride at Dashashwamedh Ghat"
               onChange={(e) => setActForm({ ...actForm, title: e.target.value })} /></Field>
             <div className="grid gap-4 sm:grid-cols-2">
               <Field label="Date"><input type="date" className={inputCls} value={actForm.scheduled_date}
@@ -338,7 +338,7 @@ export default function ItineraryBuilderPage() {
               <Field label="Time (optional)"><input type="time" className={inputCls} value={actForm.start_time}
                 onChange={(e) => setActForm({ ...actForm, start_time: e.target.value })} /></Field>
             </div>
-            <Field label="Estimated cost ($)"><input type="number" min="0" className={inputCls} value={actForm.est_cost}
+            <Field label="Estimated cost (₹)"><input type="number" min="0" className={inputCls} value={actForm.est_cost}
               onChange={(e) => setActForm({ ...actForm, est_cost: e.target.value })} /></Field>
             <Button className="w-full py-3.5" onClick={addCustomActivity} disabled={busyAct}>
               {busyAct ? 'Adding…' : 'Add to Itinerary'}

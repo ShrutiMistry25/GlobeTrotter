@@ -77,7 +77,7 @@ export default function DashboardPage() {
                 <div className="absolute bottom-5 left-5 text-white">
                   <p className="text-xs font-bold uppercase tracking-widest text-white/80">{c.country}</p>
                   <h3 className="text-xl font-extrabold">{c.name}</h3>
-                  <p className="mt-1 text-xs text-white/85">{c.activity_count} curated activities · {'$'.repeat(c.cost_index)}</p>
+                  <p className="mt-1 text-xs text-white/85">{c.activity_count} curated activities · {'₹'.repeat(c.cost_index)}</p>
                 </div>
               </Link>
             ))}

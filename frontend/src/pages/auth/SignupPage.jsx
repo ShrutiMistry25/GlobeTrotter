@@ -33,7 +33,7 @@ export default function SignupPage() {
       <form onSubmit={submit} className="space-y-5">
         <ErrorBox message={error} />
         <Field label="Full name">
-          <input className={inputCls} placeholder="Amelia Earhart" value={form.name}
+          <input className={inputCls} placeholder="Aarav Sharma" value={form.name}
             onChange={(e) => setForm({ ...form, name: e.target.value })} />
         </Field>
         <Field label="Email">

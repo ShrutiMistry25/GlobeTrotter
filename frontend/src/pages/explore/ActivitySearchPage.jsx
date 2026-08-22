@@ -10,9 +10,9 @@ const TYPES = ['outdoors', 'culture', 'food', 'adventure', 'relax'];
 const COSTS = [
   { key: '', label: 'Any cost' },
   { key: '0', label: 'Free' },
-  { key: '25', label: 'Under $25' },
-  { key: '50', label: 'Under $50' },
-  { key: '100', label: 'Under $100' }
+  { key: '500', label: 'Under ₹500' },
+  { key: '1000', label: 'Under ₹1,000' },
+  { key: '2000', label: 'Under ₹2,000' }
 ];
 const DURATIONS = [
   { key: '', label: 'Any length' },

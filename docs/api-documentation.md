@@ -28,7 +28,7 @@ Creates an account and returns a token.
 {
   "message": "Account created successfully",
   "token": "eyJhbGciOi...",
-  "user": { "id": 3, "name": "Elena Rossi", "email": "elena@globetrotter.app", "...": "..." }
+  "user": { "id": 3, "name": "Elena Rossi", "email": "test@test.com", "...": "..." }
 }
 ```
 Errors: `409` email already exists · `400` validation failed
@@ -95,14 +95,14 @@ Returns saved cities (`"Saved Horizons"`).
 ## Cities & Activities (discovery)
 
 ### GET /cities?q=&region=&sort=
-Public search. `q` matches name/country/description. `region`: Europe, Asia, Africa, Americas, Oceania. `sort=cost` sorts cheapest first. Each city includes `activity_count`.
+Public search. `q` matches name/country/description. `region`: North India, South India, West India, East India, Northeast India, Central India. `sort=cost` sorts cheapest first. Each city includes `activity_count`.
 
 ### GET /cities/:id — single city
 ### GET /cities/regions — region list with counts
 ### GET /cities/top?limit=6 — most popular cities (dashboard recommendations)
 
 ### GET /activities?cityId=&category=&maxCost=&maxDuration=&q=
-Public activity catalog search. `category`: outdoors, culture, food, adventure, relax. Costs are USD numbers, duration in hours.
+Public activity catalog search. `category`: outdoors, culture, food, adventure, relax. Costs are INR (₹) numbers, duration in hours.
 
 ### GET /activities/:id — single activity
 
@@ -121,15 +121,15 @@ List own trips with summary counters:
   "trips": [
     {
       "id": 1,
-      "name": "Kyoto Autumn Retreat",
+      "name": "Royal Rajasthan & the Taj",
       "status": "planned",
       "start_date": "2026-11-08",
       "end_date": "2026-11-16",
-      "budget_total": 3000,
+      "budget_total": 55000,
       "stop_count": 3,
       "destination_count": 3,
       "activity_count": 11,
-      "total_spent": 2442
+      "total_spent": 45050
     }
   ]
 }
@@ -153,13 +153,13 @@ Full nested detail:
   "trip": { "id": 1, "...": "..." },
   "stops": [
     {
-      "id": 1, "city_id": 2, "city_name": "Tokyo", "city_country": "Japan",
+      "id": 1, "city_id": 2, "city_name": "Jaipur", "city_country": "India",
       "arrival_date": "2026-11-08", "departure_date": "2026-11-10", "position": 0,
       "activities": [
         {
-          "id": 1, "title": "teamLab Planets Digital Art",
-          "scheduled_date": "2026-11-08", "start_time": "17:00:00",
-          "duration_hours": 2.5, "est_cost": 25, "category": "culture"
+          "id": 1, "title": "Hawa Mahal & Old City Bazaar Walk",
+          "scheduled_date": "2026-11-08", "start_time": "09:30:00",
+          "duration_hours": 2.5, "est_cost": 150, "category": "culture"
         }
       ]
     }

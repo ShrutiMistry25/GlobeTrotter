@@ -59,7 +59,7 @@ CREATE TABLE cities (
   id          INT UNSIGNED  NOT NULL AUTO_INCREMENT,
   name        VARCHAR(120)  NOT NULL,
   country     VARCHAR(80)   NOT NULL,
-  region      ENUM('Europe','Asia','Africa','Americas','Oceania') NOT NULL,
+  region      ENUM('North India','South India','West India','East India','Northeast India','Central India') NOT NULL,
   description TEXT          NULL,
   cost_index  TINYINT UNSIGNED NOT NULL DEFAULT 2 COMMENT '1=budget, 2=moderate, 3=premium',
   popularity  SMALLINT UNSIGNED NOT NULL DEFAULT 50 COMMENT '0-100',

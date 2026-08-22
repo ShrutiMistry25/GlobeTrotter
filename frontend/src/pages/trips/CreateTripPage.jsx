@@ -72,7 +72,7 @@ export default function CreateTripPage() {
           </div>
 
           <Field label="Trip name">
-            <input className={inputCls} placeholder="e.g. Kyoto Autumn Retreat" value={form.name}
+            <input className={inputCls} placeholder="e.g. Royal Rajasthan & the Taj" value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })} />
           </Field>
 
@@ -89,8 +89,8 @@ export default function CreateTripPage() {
 
           <Field label="Total budget (optional)" hint="Used for budget tracking — editable later.">
             <div className="relative">
-              <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-sm text-muted">$</span>
-              <input type="number" min="0" className={`${inputCls} pl-8`} placeholder="3000" value={budget}
+              <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-sm text-muted">₹</span>
+              <input type="number" min="0" className={`${inputCls} pl-8`} placeholder="55000" value={budget}
                 onChange={(e) => setBudget(e.target.value)} />
             </div>
           </Field>

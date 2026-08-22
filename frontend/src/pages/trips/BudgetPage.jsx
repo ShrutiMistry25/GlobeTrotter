@@ -176,7 +176,7 @@ export default function BudgetPage() {
               <BarChart data={data.per_day}>
                 <XAxis dataKey="date" tickFormatter={(d) => d.slice(8)} tickLine={false} axisLine={false}
                   tick={{ fontSize: 11, fill: '#8A8078' }} />
-                <YAxis tickFormatter={(v) => `$${v}`} tickLine={false} axisLine={false} width={44}
+                <YAxis tickFormatter={(v) => `₹${v}`} tickLine={false} axisLine={false} width={44}
                   tick={{ fontSize: 11, fill: '#8A8078' }} />
                 <Tooltip formatter={(v) => [money2(v), 'Spent']} labelFormatter={(l) => fmtDay(l)} cursor={{ fill: 'rgba(140,74,46,0.06)' }} />
                 <Bar dataKey="amount" radius={[6, 6, 0, 0]}>
@@ -232,8 +232,8 @@ export default function BudgetPage() {
       </section>
 
       <Modal open={budgetEdit} onClose={() => setBudgetEdit(false)} title="Set total budget">
-        <Field label="Total budget ($)">
-          <input type="number" min="0" className={inputCls} value={budgetVal} onChange={(e) => setBudgetVal(e.target.value)} placeholder="3000" />
+        <Field label="Total budget (₹)">
+          <input type="number" min="0" className={inputCls} value={budgetVal} onChange={(e) => setBudgetVal(e.target.value)} placeholder="55000" />
         </Field>
         <Button className="mt-5 w-full py-3.5" onClick={saveBudget}>Save Budget</Button>
       </Modal>
@@ -241,10 +241,10 @@ export default function BudgetPage() {
       <Modal open={expModal} onClose={() => setExpModal(false)} title="Add expense">
         <div className="space-y-4">
           <Field label="What was it?">
-            <input className={inputCls} value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} placeholder="e.g. JR Rail Pass" />
+            <input className={inputCls} value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} placeholder="e.g. IRCTC Train Tickets" />
           </Field>
           <div className="grid grid-cols-2 gap-4">
-            <Field label="Amount ($)">
+            <Field label="Amount (₹)">
               <input type="number" min="0" step="0.01" className={inputCls} value={form.amount} onChange={(e) => setForm({ ...form, amount: e.target.value })} />
             </Field>
             <Field label="Date (optional)">
