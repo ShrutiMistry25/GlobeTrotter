@@ -11,6 +11,12 @@ function notFound(res, what = 'Trip') {
   return res.status(404).json({ error: `${what} not found` });
 }
 
+function toIdArray(ids) {
+  const mapped = (ids || []).map(Number);
+  if (mapped.some((n) => !Number.isInteger(n) || n < 1)) return null;
+  return mapped;
+}
+
 exports.listTrips = asyncHandler(async (req, res) => {
   const trips = await tripModel.listTripsByUser(req.user.id);
   res.json({ count: trips.length, trips });
@@ -89,8 +95,12 @@ exports.reorderStops = asyncHandler(async (req, res) => {
   if (!Array.isArray(stopIds) || !stopIds.length) {
     return res.status(400).json({ error: 'stopIds array is required' });
   }
+  const ids = toIdArray(stopIds);
+  if (!ids) {
+    return res.status(400).json({ error: 'stopIds must be an array of positive integers' });
+  }
 
-  await tripModel.reorderStops(owned.id, stopIds.map(Number));
+  await tripModel.reorderStops(owned.id, ids);
   const stops = await tripModel.getStops(owned.id);
   res.json({ message: 'Stops reordered', stops });
 });
@@ -152,8 +162,12 @@ exports.reorderActivities = asyncHandler(async (req, res) => {
   if (!Array.isArray(activityIds) || !activityIds.length) {
     return res.status(400).json({ error: 'activityIds array is required' });
   }
+  const ids = toIdArray(activityIds);
+  if (!ids) {
+    return res.status(400).json({ error: 'activityIds must be an array of positive integers' });
+  }
 
-  await tripModel.reorderStopActivities(stop.id, activityIds.map(Number));
+  await tripModel.reorderStopActivities(stop.id, ids);
   const activities = (await tripModel.getActivities(owned.id)).filter((a) => a.stop_id === stop.id);
   res.json({ message: 'Activities reordered', activities });
 });
@@ -199,11 +213,10 @@ exports.deleteExpense = asyncHandler(async (req, res) => {
   const owned = await getOwnedTrip(req);
   if (!owned) return notFound(res);
 
-  const expenses = await tripModel.getExpenses(owned.id);
-  const expense = expenses.find((e) => e.id === Number(req.params.expenseId));
-  if (!expense) return notFound(res, 'Expense');
+  const existing = await tripModel.getExpenseById(Number(req.params.expenseId));
+  if (!existing || existing.trip_id !== owned.id) return notFound(res, 'Expense');
 
-  await tripModel.deleteExpense(expense.id);
+  await tripModel.deleteExpense(existing.id);
   res.json({ message: 'Expense deleted' });
 });
 

@@ -22,7 +22,7 @@ exports.getRegions = asyncHandler(async (req, res) => {
 });
 
 exports.getTopCities = asyncHandler(async (req, res) => {
-  const limit = Math.min(Number(req.query.limit) || 6, 20);
+  const limit = Math.max(1, Math.min(Number(req.query.limit) || 6, 20));
   const cities = await cityModel.topCities(limit);
   res.json({ count: cities.length, cities });
 });

@@ -19,7 +19,7 @@ router.post(
 router.post(
   '/login',
   [
-    body('email').isEmail().withMessage('A valid email is required'),
+    body('email').isEmail().withMessage('A valid email is required').normalizeEmail(),
     body('password').notEmpty().withMessage('Password is required')
   ],
   validate,
@@ -28,7 +28,7 @@ router.post(
 
 router.post(
   '/forgot-password',
-  [body('email').isEmail().withMessage('A valid email is required')],
+  [body('email').isEmail().withMessage('A valid email is required').normalizeEmail()],
   validate,
   authController.forgotPassword
 );

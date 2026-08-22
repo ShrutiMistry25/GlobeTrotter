@@ -6,9 +6,20 @@ const app = express();
 
 app.use(express.json({ limit: '2mb' }));
 
+const allowedOrigins = [
+  process.env.CLIENT_URL,
+  'http://localhost:5173',
+  'http://127.0.0.1:5173'
+].filter(Boolean);
+
 app.use((req, res, next) => {
-  const origin = process.env.CLIENT_URL;
-  res.header('Access-Control-Allow-Origin', origin || '*');
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.header('Vary', 'Origin');
+    res.header('Access-Control-Allow-Origin', origin);
+  } else if (!allowedOrigins.length) {
+    res.header('Access-Control-Allow-Origin', '*');
+  }
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
   if (req.method === 'OPTIONS') return res.sendStatus(204);

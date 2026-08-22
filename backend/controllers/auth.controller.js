@@ -38,7 +38,11 @@ exports.login = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
   const user = await userModel.findByEmail(email.toLowerCase());
-  if (!user || !(await bcrypt.compare(password, user.password_hash))) {
+  if (!user) {
+    await bcrypt.compare(password, '$2a$10$CwTycUXWue0Thq9StjUM0uJ8ZfKzPQhZnG0cV1xYv5e9nM2oL4S7O');
+    return res.status(401).json({ error: 'Invalid email or password' });
+  }
+  if (!(await bcrypt.compare(password, user.password_hash))) {
     return res.status(401).json({ error: 'Invalid email or password' });
   }
 

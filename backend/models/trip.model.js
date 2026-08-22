@@ -222,8 +222,8 @@ async function addStopActivity(stopId, fields) {
       throw err;
     }
     const cat = cats[0];
-    title = title || cat.title;
-    category = category || cat.category;
+    title = title !== undefined && title !== '' ? title : cat.title;
+    category = category !== undefined && category !== '' ? category : cat.category;
     est_cost = est_cost !== undefined && est_cost !== '' ? est_cost : cat.est_cost;
     duration_hours = duration_hours !== undefined && duration_hours !== '' ? duration_hours : cat.duration_hours;
   }
@@ -243,8 +243,8 @@ async function addStopActivity(stopId, fields) {
       title,
       scheduled_date,
       start_time || null,
-      duration_hours || 2.0,
-      est_cost || 0,
+      duration_hours === undefined || duration_hours === '' ? 2.0 : duration_hours,
+      est_cost === undefined || est_cost === '' ? 0 : est_cost,
       category || 'outdoors',
       notes || null,
       maxPos
@@ -373,7 +373,7 @@ function buildBudget(trip, stops, activities, expenses) {
 
   const start = new Date(`${trip.start_date}T00:00:00Z`);
   const end = new Date(`${trip.end_date}T00:00:00Z`);
-  const dayCount = Math.round((end - start) / 86400000) + 1;
+  const dayCount = Math.max(1, Math.round((end - start) / 86400000) + 1);
 
   const dailyMap = {};
   for (const e of expenses) {

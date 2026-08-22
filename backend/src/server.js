@@ -10,6 +10,11 @@ if (fs.existsSync(rootEnv)) {
 
 const app = require('./app');
 
+if (!process.env.JWT_SECRET) {
+  console.error('FATAL: JWT_SECRET is not set. Copy ../.env.example to backend/.env and configure it.');
+  process.exit(1);
+}
+
 const PORT = Number(process.env.PORT || 5000);
 
 app.listen(PORT, () => {

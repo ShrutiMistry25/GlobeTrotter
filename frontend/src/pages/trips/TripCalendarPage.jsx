@@ -34,10 +34,8 @@ export default function TripCalendarPage() {
     return map;
   }, [detail]);
 
-  if (!detail || !cursor) return <PageLoader />;
-  const { trip } = detail;
-
   const grid = useMemo(() => {
+    if (!cursor) return [];
     const first = new Date(cursor.y, cursor.m, 1);
     const startPad = (first.getDay() + 6) % 7;
     const count = new Date(cursor.y, cursor.m + 1, 0).getDate();
@@ -48,6 +46,9 @@ export default function TripCalendarPage() {
     while (cells.length % 7 !== 0) cells.push(null);
     return cells;
   }, [cursor]);
+
+  if (!detail || !cursor) return <PageLoader />;
+  const { trip } = detail;
 
   const shiftMonth = (dir) => {
     let m = cursor.m + dir, y = cursor.y;

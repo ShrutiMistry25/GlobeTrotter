@@ -1,12 +1,14 @@
 const db = require('../config/db');
 
+const escapeLike = (v) => String(v).replace(/[\\%_]/g, (ch) => `\\${ch}`);
+
 async function searchCities({ q, region, sort }) {
   const where = [];
   const params = [];
 
   if (q) {
-    where.push('(c.name LIKE ? OR c.country LIKE ? OR c.description LIKE ?)');
-    const like = `%${q}%`;
+    where.push("(c.name LIKE ? ESCAPE '\\\\' OR c.country LIKE ? ESCAPE '\\\\' OR c.description LIKE ? ESCAPE '\\\\')");
+    const like = `%${escapeLike(q)}%`;
     params.push(like, like, like);
   }
   if (region) {

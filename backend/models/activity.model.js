@@ -1,5 +1,7 @@
 const db = require('../config/db');
 
+const escapeLike = (v) => String(v).replace(/[\\%_]/g, (ch) => `\\${ch}`);
+
 async function searchActivities({ cityId, category, maxCost, maxDuration, q }) {
   const where = [];
   const params = [];
@@ -21,8 +23,8 @@ async function searchActivities({ cityId, category, maxCost, maxDuration, q }) {
     params.push(Number(maxDuration));
   }
   if (q) {
-    where.push('(a.title LIKE ? OR a.description LIKE ? OR c.name LIKE ?)');
-    const like = `%${q}%`;
+    where.push("(a.title LIKE ? ESCAPE '\\\\' OR a.description LIKE ? ESCAPE '\\\\' OR c.name LIKE ? ESCAPE '\\\\')");
+    const like = `%${escapeLike(q)}%`;
     params.push(like, like, like);
   }
 
