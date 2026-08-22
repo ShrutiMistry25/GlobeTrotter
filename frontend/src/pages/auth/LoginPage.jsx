@@ -47,7 +47,7 @@ export default function LoginPage() {
           {busy ? 'Logging in…' : 'Log In'}
         </Button>
         <p className="rounded-xl bg-primary-container px-4 py-3 text-center text-xs font-semibold text-primary-dark">
-          Demo account: elena@globetrotter.app / Demo@1234
+          Demo account: test@test.com / test1234
         </p>
         <p className="text-center text-sm text-muted">
           New here?{' '}
